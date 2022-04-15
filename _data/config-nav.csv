@@ -1,9 +1,8 @@
 display_name,stub,dropdown_parent
-Home,/
-Browse,/browse.html
-Subjects,/subjects.html
-Locations,/locations.html
-Map,/map.html
-Timeline,/timeline.html
-Data,/data.html
-About,/about.html
+Play,/
+Setup,/setup/
+Line Quotes Example,line-quotes.html
+Production History,
+Earliest Performances,/production.html,Production History
+History Number Two,/secondhistory.html,Production History
+What is Love,/love.html,About

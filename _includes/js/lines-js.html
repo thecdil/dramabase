@@ -1,0 +1,198 @@
+{%- assign fields = site.data.config-browse -%}
+<script>
+{% include js/dd-items.js %}
+/* function to make each line to page */
+function makeLine(obj) {
+    var index = dd_items.findIndex(i => i.dataline== obj.dataline);
+    if (index == 0) {}
+    else{
+    var prevLineNum = index -1 ;
+    var prevLineObject = dd_items[prevLineNum];
+    var prevPlayer = prevLineObject.player;
+  }
+
+  if(obj.highlight) {
+      var hilite = '<span class="hilite hi-'+ annoId + '" data-filter="hi-'+ annoId + '">'+ obj.highlight +'</span>';
+      var playerline = obj.playerline.replace(obj.highlight,hilite); }
+      else{
+        var playerline = obj.playerline;
+      }
+
+  if (obj.player == "StageDirection") {
+        var player;
+        if (obj.playerline.toLowerCase().startsWith("act ")){
+          var playerClass = "StageDirection actstart";  
+          
+        }
+        else if (obj.playerline.toLowerCase().startsWith("scene ")){
+          var playerClass = "StageDirection scenestart";  
+               }
+        else  {
+          var playerClass = "StageDirection";  
+          var playerline = '[' + obj.playerline +']';
+        }
+      }
+    else if(obj.player == prevPlayer) {
+        var player;
+        var playerClass = obj.player.replace(' ','');  
+    }
+     else  {
+        var player = obj.player;
+        var playerClass = obj.player.replace(' ','');  
+    }
+    
+    if(obj.annotation) {
+      if (obj.annotation.includes("ibid")){
+        var subtractingNumber = parseInt(obj.annotation.replace("ibid",""));
+        var mainNumber = parseInt(obj.dataline) - subtractingNumber;
+        var ibid = obj.annotation;
+        var annoId = 'anno' + mainNumber;
+      } else { 
+        // load markdownit library
+        var md = window.markdownit();
+        var annotation = md.renderInline(obj.annotation);
+        annoId = 'anno' + obj.dataline;
+      }
+    }
+    else { 
+        var annotation; 
+    }
+
+
+      if (parseInt(obj.line) % 5 === 0){
+        var lineNumber = obj.actsceneline;
+      } else { var lineNumber = ''}
+
+    var line = '<div class="line">'; 
+    // add player if new player to announce
+    if(player) {
+      line += '<div class="' + playerClass + ' act' + obj.act + 'scene' + obj.scene + ' row mt-4 playline" style=""><div class="col-1 small"></div><div class="col-8 col-md-9 font-weight-bold"><p class="mb-0 playerline fw-bold">' + obj.player + ': </p></div></div>';
+    }
+    // start line
+    line += '<div id="' + obj.dataline + '" class="' + playerClass + ' act' + obj.act + 'scene' + obj.scene + ' row playline textline" style="">';
+    // add act.scene.line number
+    line += '<div class="col-1" id="' + obj.actsceneline + '"><p class="small mt-2 text-end m-0" style="font-size:10px;">' + lineNumber + '</p></div>';
+    // add the line itself
+    
+  // add playerline andannotation  if it exists
+  if(annotation) {
+    line += '<div class="col-10 col-md-6 pr-0 playerline col-6 annobutton annotated" data-filter="'+ annoId + '">' + playerline + '</div>';
+    line += '<div class="d-none d-md-block col-12 col-md-5 small anno-container"><div class="annotation annobutton" id="'+ annoId + '" data-filter="' + annoId + '"><div class="content"><p>' + annotation + '</p></div></div></div>';
+    }
+    else if (ibid){
+      line += '<div class="col-6 pr-0 playerline col-6 annobutton annotated '+ annoId + '" data-filter="'+ annoId + '">' + playerline + '</div>';
+    line += '<div class="col-5 small anno-container"><div class="annotation annobutton '+ annoId + '" data-filter="' + annoId + '"><div class="content"><p> </p></div></div></div>';
+    }
+    else {
+    line += '<div class="col-6 pr-0 playerline">' + playerline + '</div>';
+    line += '<div class="col-5 small"></div>';
+    }
+
+    line += '</div></div>';
+    // send back big string
+    return line;
+}
+
+
+/* function to filter items to be displayed on browse */
+function filterItems(arr,q) {
+  // dont filter if no q 
+  if (q=="") { 
+    var filteredItems = arr; 
+  } else {
+    q = q.trim().toUpperCase(); 
+    // filter items
+    var filteredItems = [];
+    for (var i = 0, len = arr.length; i < len; i++) {
+      var val = "";
+      for (var k in arr[i]) { val += arr[i][k] + " "; }
+      if(val.toUpperCase().indexOf(q) != -1){
+        filteredItems.push(arr[i]);
+      }
+    }
+  }
+  // add number 
+  $("#numberOf").html(filteredItems.length + " of " + arr.length + " items");
+    // add stuff, make lines first in giant var, then add all at once to speed things up
+  var lines = "";
+  for (var i = 0, len = filteredItems.length; i < len; i++) {
+    lines += makeLine(filteredItems[i]);
+  }
+  $("#contents-container").html(lines);
+
+  // finish
+  $("#loading").hide();
+};
+
+
+function selectPlayers(arr) {
+  var options = '<option value="#" class="reset" selected="selected reset">Filter by Player</option>';
+  var unique = [... new Set(arr)];
+  for (var i = 0, len = unique.length; i < len; i++) {
+    var charClass = unique[i].replace(' ','');
+    options += '<option value="'+charClass+'">'+unique[i]+'</option>';
+  }
+  $("#players").html(options);
+}
+
+function selectScenes(arr) {
+  var options = '<option value="#" class="reset" selected="selected reset">Filter by Scene</option>';
+  var scenesNav = '';
+  for (var i = 0, len = arr.length; i < len; i++) {
+    var act = arr[i].split('.')[0];
+    var scene = arr[i].split('.')[1];
+    var sceneClass = 'act' + act + 'scene' + scene;
+    options += '<option value="'+sceneClass+'">Act ' + act + ', Scene ' + scene +'</option>';
+    scenesNav += '<a class="dropdown-item" href="?scene=act' + act + 'scene' + scene +'">Act ' + act + ', Scene ' + scene +'</a>'
+  } 
+  $("#scenes").html(options);
+  $("#scenesNavDropdown").html(scenesNav);
+
+}
+
+
+/* function to init browse after loading items */ 
+function pageInit(items) {
+  /* filter if hash in initial URL */
+  if(window.location.hash) {
+    query = decodeURIComponent(location.hash.substr(1));
+    $('#quickSearch').val(query);
+    filterItems(items,query);
+   
+  } else {
+    query = "";
+    dd_actscenes = $.unique(items.map(function (d) {return d.actscene;}));
+    dd_players = $.unique(items.map(function (d) {return d.player;}));
+    selectScenes(dd_actscenes);
+    selectPlayers(dd_players);
+    filterItems(items,query);
+  }
+}
+
+
+
+   
+/* add hash if search button clicked */ 
+$('#goButton').click( function() {
+  window.location.hash = encodeURIComponent($('#quickSearch').val());
+});
+/* add hash if if enter is pressed */
+$('#quickSearch').keypress(function(e){
+  if(e.which == 13){
+      window.location.hash = encodeURIComponent($('#quickSearch').val());
+    }
+});
+/* filter if hash changes */ 
+$(window).on("hashchange", function() {
+  // show spinner
+  $("#loading").show();
+  // read hash
+  query = decodeURIComponent(location.hash.substr(1));
+  $('#quickSearch').val(query);
+  // filter
+  filterItems(dd_items,query);
+ 
+});
+
+
+</script>

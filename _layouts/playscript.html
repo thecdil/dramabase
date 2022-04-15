@@ -1,0 +1,83 @@
+---
+layout: default
+custom-foot: js/lines-js.html;js/transcript-js.html;js/annotation-js.html
+---
+
+{% assign lines = site.data[site.play]  %}
+
+{%- comment -%} find all words used in the player field of our metadata {%- endcomment -%}
+{% capture players_play %}{% for line in lines %}{% unless line.player == "ACT" or line.player == "SCENE" %}{{- line.player -}};{% endunless %}{% endfor %}{% endcapture%}
+{%- assign players = players_play | split: ";" -%}
+{%- assign uniquePlayers = players | uniq -%}
+
+{%- comment -%} find all acts and sences {%- endcomment -%}
+{%- assign uniqueScenes = lines | map: 'actscene' | compact | uniq -%}
+
+<div class="container">
+    <div class="row my-3">
+        <div class="col-md-12">
+            <h1>{{ site.play_title }}</h1>
+        </div>
+      
+    </div>
+    
+    <div class="row my-3 sticky-top bg-white border-bottom border-left border-right">
+        
+        <div class="col-md-3">
+            <p class="pt-4">
+                <select id="scenes" title="Jump to a year" class="filteroptions filters px-3 py-2" style="max-width: 100%;">
+                    <option value="#" class="reset" selected="selected reset">Filter by Scene</option>
+                    
+                </select>
+            </p>
+        </div>
+        <div class="col-md-3">
+            <p class="pt-4">
+                <select id="players" title="Jump to a year" class="filteroptions filters px-3 py-2" style="max-width: 100%;">
+                    <option value="#" class="reset" selected="selected reset">Filter by Player</option>
+                    
+                </select>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <div id="scriptsearch" class="bg-lightr">
+                <div class="row pt-4">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="goButton" id="quicksearch" >
+                            <div class="input-group-append">
+                              <button class="btn btn-primary rounded-right border-light input-group-text" type="submit" title="Search" alt="Search" id="goButton" onclick="filterItems()">Go</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="reset btn btn-sm btn-secondary mt-1" href="#" data-filter="">Reset Filters</button>
+                        <h5 class="d-none linecount" ><span class="info2"><span id="numberof">{{ lines | size }}</span> of {{ lines | size }} lines</span></h5>
+
+                    </div>
+                </div>
+                    <!--<div class="filteroptions mx-2 p-4 mb-4">
+                        <div class="form-inline my-2 my-lg-0 ">
+                            <div class="input-group input-group-lg">
+                            <input type="text" id="quicksearch" placeholder="Search ... " class="searchinput form-control form-control-lg mr-2 col-4">
+                            <input class="searchinput mx-2 btn btn-sm btn-primary col-2" title="Search" value="Go" alt="Search" id="goButton" onclick="filterItems()">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary rounded-right border-light" type="submit" title="Search" alt="Search" id="goButton" onclick="filterItems()">Search</button>
+                            </div>
+                        </div>
+                        </div>-->
+                </div>
+               </div>
+   
+        
+     
+    </div>
+    <div id="contents-container">
+        
+    </div>
+    <div class="my-4">
+        <hr />
+        <hr />
+
+    </div>
+</div>

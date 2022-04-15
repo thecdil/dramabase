@@ -1,39 +1,36 @@
 ##########
-# collectionbuilder-gh
-# Jekyll Digital Collection Generator, designed for GitHub Pages
-# https://github.com/CollectionBuilder/collectionbuilder-gh
+# Digital Dramaturgy - Shakespeare Edition
+# Tool for annotating/editing/publishing Shakespeare plays using Static Web Technologies
+# https://github.com/thecdil/digitaldramaturgy
 ##########
 
 ##########
-# URL VARIABLES [optional if using GitHub Pages!]
-#
-# url is site domain, full URL to the production location of your collection
-# on GitHub Pages follows the pattern username.github.io
-#url: https://collectionbuilder.github.io 
-# baseurl is path to location on the domain if necessary e.g. /digital/hjccc
-# on GitHub Pages it is your github repository's name prefixed with a /
-#baseurl: /collectionbuilder-gh 
-# location of code, the full url to your github repository
-source-code: https://github.com/CollectionBuilder/collectionbuilder-gh
+# Play SETTINGS
+# Google sheets link or relative link to CSV file in the repository
+# romeo and juliet 
+play: https://docs.google.com/spreadsheets/d/e/2PACX-1vTqThHhW7kX9GoT37IB8xYUEB4K74gkSBtP9Lri58QelNVTSExuEhzGQZclCFo7hYAUKDOufvCCrjyI/pub?gid=404955959&single=true&output=csv
+# midsummer play: https://docs.google.com/spreadsheets/d/e/2PACX-1vT4-hSjZe4pN0R2-fzmNyc_yrE355W1RgOBmYJ4PF-Lsyo1bKpWVKgwYqGOxGnMvvV41__J66Yjyxa1/pub?gid=651170933&single=true&output=csv
+# henry v play: https://docs.google.com/spreadsheets/d/e/2PACX-1vTiBb7vwlfPv0Y1JEtAUkecHtgkmPT0lHgSvuWhKyhUYfJPAaEtNxYtfDEkxmaiJ1rPeJxu41_9WAwf/pub?gid=0&single=true&output=csv
 
 ##########
-# SITE SETTINGS
-#
-# title of site appears in banner
-title: CollectionBuilder-GH 
-# tagline, a short phrase that will appear throughout the site in the top banner
-tagline: a template for creating simple digital exhibits
+# Site SETTINGS
+# Site
+title: A Midsummer Night's Dream
+# tagline, a short phrase that will appear throughout the site in the top banner (optional!)
+# tagline: a collaborative annotation of ... 
 # description appears in meta tags and other locations
 # this description might appear in search result lists, keep around 160 characters max
-description: "CollectionBuilder-GH is a template for creating small digital collection exhibits on GitHub Pages designed for teaching digital library skills"
+description: "a collaborative annotation of Shakespeare's Romeo and Juliet"
 # creator of the digital collection, to appear in meta tags; we typically use our GitHub usernames but feel free to just use your name
-author: CollectionBuilder
+author: dcnb
+
 
 ##########
 # COLLECTION SETTINGS
 #
 # Set the metadata for your collection (the name of the csv file in your _data directory that describes the objects in your collection) 
 # Use the filename of your CSV **without** the ".csv" extension! E.g. _data/demo-metadata.csv --> "demo-metadata"
+# You only need to fill this out if you are using the CollectionBuilder features also built into this tool, i.e. if you are connecting your annotations and interpretations to a digital collection of objects
 metadata: demo-metadata 
 
 ##########
