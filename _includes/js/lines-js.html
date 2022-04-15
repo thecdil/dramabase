@@ -62,7 +62,7 @@ function makeLine(obj) {
         var lineNumber = obj.actsceneline;
       } else { var lineNumber = ''}
 
-    var line = '<div class="line">'; 
+    var line = '<section class="line">'; 
     // add player if new player to announce
     if(player) {
       line += '<div class="' + playerClass + ' act' + obj.act + 'scene' + obj.scene + ' row mt-4 playline" style=""><div class="col-1 small"></div><div class="col-8 col-md-9 fw-bold"><p class="mb-0 playerline fw-bold">' + obj.player + ': </p></div></div>';
@@ -87,7 +87,7 @@ function makeLine(obj) {
     line += '<div class="d-none d-md-block col-12 col-md-5 small"></div>';
     }
 
-    line += '</div></div>';
+    line += '</div></section>';
     // send back big string
     return line;
 }
@@ -125,7 +125,7 @@ function filterItems(arr,q) {
 
 
 function selectPlayers(arr) {
-  var options = '<option value="#" class="reset" selected="selected reset">Filter by Player</option>';
+  var options = '<option value="#" class="reset" selected="selected reset">Players</option>';
   var unique = [... new Set(arr)];
   for (var i = 0, len = unique.length; i < len; i++) {
     var charClass = unique[i].replace(' ','');
@@ -135,7 +135,7 @@ function selectPlayers(arr) {
 }
 
 function selectScenes(arr) {
-  var options = '<option value="#" class="reset" selected="selected reset">Filter by Scene</option>';
+  var options = '<option value="#" class="reset" selected="selected reset">Scenes</option>';
   var scenesNav = '';
   var scenesSide = '';
   for (var i = 0, len = arr.length; i < len; i++) {
@@ -143,13 +143,22 @@ function selectScenes(arr) {
     var scene = arr[i].split('.')[1];
     var sceneClass = 'act' + act + 'scene' + scene;
     options += '<option value="'+sceneClass+'">Act ' + act + ', Scene ' + scene +'</option>';
-    scenesNav += '<li class="dropdown-item"><a class="link-dark rounded " href="/?scene=act' + act + 'scene' + scene +'"><span class="d-md-none"></span><span class="d-none d-md-block">Act ' + act + ', Scene ' + scene +'</span></a></li>'
-    scenesSide += '<a class="active py-0 border-bottom fst-italic small text-secondary" role="button" onclick="scrollToScene(\'act' + act + 'scene' + scene +'\')"><span class="d-md-none">' + arr[i] +'</span><span class="d-none d-md-block">Act ' + act + ', Scene ' + scene +'</span></a><br>'
+    scenesNav += '<li class="dropdown-item"><a class="link-dark rounded " href="/?scene=act' + act + 'scene' + scene +'"><span class="d-md-none">'+ arr[i] +'</span><span class="d-none d-md-block">Act ' + act + ', Scene ' + scene +'</span></a></li>'
+    scenesSide += '<a class="py-0 border-bottom fst-italic small text-secondary" role="button" onclick="scrollToScene(\'act' + act + 'scene' + scene +'\')" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Jump to Scene '+ arr[i] +'">' + arr[i] +'</span></a><br>'
   } 
   $("#scenes").html(options);
   $("#scenesNavDropdown").html(scenesNav);
   $("#scenesScroll").html(scenesSide);
 }
+
+/* global bootstrap: false */
+(function () {
+  'use strict'
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+    new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+})()
 
 function scrollToScene(scene) {
     const scene_starts = document.getElementsByClassName(scene);
@@ -176,31 +185,6 @@ function pageInit(items) {
     filterItems(items,query);
   }
 }
-
-
-
-   
-/* add hash if search button clicked */ 
-$('#goButton').click( function() {
-  window.location.hash = encodeURIComponent($('#quickSearch').val());
-});
-/* add hash if if enter is pressed */
-$('#quickSearch').keypress(function(e){
-  if(e.which == 13){
-      window.location.hash = encodeURIComponent($('#quickSearch').val());
-    }
-});
-/* filter if hash changes */ 
-$(window).on("hashchange", function() {
-  // show spinner
-  $("#loading").show();
-  // read hash
-  query = decodeURIComponent(location.hash.substr(1));
-  $('#quickSearch').val(query);
-  // filter
-  filterItems(dd_items,query);
- 
-});
 
 {% include js/dd-items.js %}
 </script>
