@@ -14,13 +14,13 @@ custom-foot: js/lines-js.html;js/transcript-js.html;js/annotation-js.html
 {%- assign uniqueScenes = lines | map: 'actscene' | compact | uniq -%}
 
 <div class="container">
-    <button class="btn btn-outline-dark sticky-top float-end mt-n2 p-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
-        Filters <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-square-fill" viewBox="0 0 16 16">
+    <button class="btn btn-outline-dark sticky-top float-end mt-n2 p-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters">
+        Filters <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-filter-square-fill" viewBox="0 0 20 20">
             <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm.5 5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1 0-1zM4 8.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm2 3a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5z"/>
           </svg>
       </button>
     
-    <div class="row my-3 sticky-top bg-white border-bottom border-left border-right d-print-none collapse" id="collapseFilters">
+    <div class="row my-3 sticky-top bg-white border-bottom border-left border-right d-print-none collapse w-75" id="collapseFilters">
         
         <div class="col-md-3">
             <p class="pt-4">
@@ -42,16 +42,16 @@ custom-foot: js/lines-js.html;js/transcript-js.html;js/annotation-js.html
             <div id="scriptsearch" class="bg-lightr">
                 <div class="row pt-4">
                     <div class="col-md-6">
-                        <div class="input-group">
+                        <div class="input-group fs-5">
                             <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="goButton" id="quicksearch" >
                             <div class="input-group-append">
-                              <button class="btn btn-primary rounded-right border-light input-group-text" type="submit" title="Search" alt="Search" id="goButton" onclick="filterItems()">Go</button>
+                              <button class="btn btn-primary rounded-right border-light input-group-text" type="submit" title="Search" alt="Search" id="goButton" onclick="filterLines()">Go</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <button class="reset btn btn-sm btn-secondary mt-1" href="#" data-filter="">Reset Filters</button>
-                        <h5 class="d-none linecount" ><span class="info2"><span id="numberof"></span></h5>
+                        <button class="reset btn btn-sm btn-outline-primary mt-1" href="#" data-filter="">Reset Filters</button>
+                        <h5 class="d-none linecount mt-2 small ms-3" ><span class="info2"><span id="numberof"></span></h5>
 
                     </div>
                 </div>
