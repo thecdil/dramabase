@@ -8,7 +8,7 @@
     $('div.' + myClass).show();
     $("input#quicksearch").val("");
     var numberofint = $('div.'+ myClass).length;
-    $("#numberof").html(numberofint);
+    $("#numberof").html(numberofint + " lines");
     $('.linecount').removeClass('d-none');
     $("select").not(this).val($("option:first").val());
     let url = new URL(window.location);
@@ -29,7 +29,7 @@
     $('div.' + myClass).show();
     $("input#quicksearch").val("");
     var numberofint = $('div.'+ myClass).length;
-    $("#numberof").html(numberofint);
+    $("#numberof").html(numberofint + " lines");
     $('.linecount').removeClass('d-none');
     $("select").not(this).val($("option:first").val());
     let url = new URL(window.location);
@@ -41,6 +41,20 @@
     window.history.replaceState({}, '', location.pathname + '?' + p);
   });
 
+  $("button#filters").click(function () {
+    let url = new URL(window.location);
+    let params = url.searchParams;
+    var sceneFilter = url.searchParams.get('scene');
+    if (sceneFilter) {
+    } else
+    {
+      $('#side-scene-scroll').toggleClass('d-none');
+      $("button.reset").click();
+    }
+});
+    
+   
+
   $("button.reset").click(function () {
     $(".playline").show();
     $(".searchline").removeClass("grey");
@@ -49,11 +63,13 @@
     $("div").removeClass("featured");
     $("section").removeClass("featured");
     $("span").removeClass("text-danger");
+    $("p").removeClass("grey");
+    $("div").removeClass("grey");
     $("input#quicksearch").val("");
     $("#players").val($("#players option:first").val());
     $("#scenes").val($("#scenes option:first").val());
     var numberofint = $('section').length;
-    $("#numberof").html(numberofint);
+    $("#numberof").html(numberofint + " lines");
     let url = new URL(window.location);
     let params = url.searchParams;
     params.delete('q');
@@ -71,9 +87,10 @@
 
 </script>
 <script>
-  function filterItems() {
+  function filterLines() {
     $('.playerline').removeClass("anchored-highlight");
-    $("section").removeClass("featured");
+    $(".playerline").removeClass("featured");
+    $(".playerline").addClass("grey");
     var input, filter, p, span, i;
     input = document.getElementById("quicksearch");
     let url = new URL(window.location);
@@ -86,23 +103,19 @@
     itemcontainer = document.getElementById("contents-container");
     item = itemcontainer.getElementsByTagName("section");
     for (i = 0; i < item.length; i++) {
-      itemcontents = item[i].getElementsByTagName("div")[0];
+      itemcontents = item[i].getElementsByClassName("playerline")[0];
       var index = itemcontents.innerHTML.indexOf(filterplain);
-      console.log(filter + index)
       if (itemcontents) {
         if (itemcontents.innerHTML.toUpperCase().indexOf(filter) > -1) {
-          item[i].classList.add("featured");
-          item[i].classList.remove("grey");
+          itemcontents.classList.add("featured");
+          itemcontents.classList.remove("grey");
+          $(".annotation .content p").addClass("grey");
           itemcontents.innerHTML = itemcontents.innerHTML.replace(filterplain, "<span class='text-danger'>" + filterplain + "</span>");
-
         } else {
-          item[i].classList.remove("featured");
-          item[i].classList.add("grey");
         }
       }
      var numberofint = $('.featured').length;
-     $("#numberof").html(numberofint);
-     $('.linecount').removeClass('d-none');
+     $("#numberof").html(numberofint + " lines");
     }
   }
 
@@ -146,27 +159,32 @@
     var playerFilter = url.searchParams.get('player');
     var hashfilter = decodeURIComponent(location.hash.substr(1));//.replace(/%20/g, " ");
     if (dataFilter) {
-      // code to be executed if a hash is contained in the url
+      // code to be executed if a search filter is contained in the url
       $('#quicksearch').val(dataFilter);
       $('#goButton').click();
       params.delete('scene');
       params.delete('player');
+      $('#filters').click();
       //$(hashfilterclass).addClass('active');
     }
     else if (playerFilter) {
       params.delete('q');
-      // code to be executed if a filter is contained in the url search parameters
+      // code to be executed if a Player filter is contained in the url search parameters
       $('#players').val(playerFilter).change();
+      $('#filters').click();
       //$(hashfilterclass).addClass('active');
     }
     else if (sceneFilter) {
       params.delete('q');
-      // code to be executed if a filter is contained in the url search parameters
+      // code to be executed if a Scene filter is contained in the url search parameters
       $('#scenes').val(sceneFilter).change();
+      $('#side-scene-scroll').addClass('d-none');
       //$(hashfilterclass).addClass('active');
     }
     else if (hashfilter) {
       params.delete('q');
+      params.delete('scene');
+      params.delete('player');
       // code to be executed if an anchor (#) is contained in the url
       $('#' + hashfilter).addClass('anchored-highlight');
 

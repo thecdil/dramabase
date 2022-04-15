@@ -6,6 +6,8 @@
     var annotation = $(this).data("filter");
     $("div").not("#" + annotation).removeClass("annotate-show");
     $("#" + annotation).toggleClass('annotate-show');
+    $("#" + annotation + " .content p").toggleClass('grey');
+
     $("span.hilite").not(".hi-" + annotation).removeClass('fw-bold');
     $(".hi-" + annotation).toggleClass('fw-bold');
   });
