@@ -21,7 +21,7 @@
 {% unless line.player == prev_player or forloop.first %}
 <div class="{{ line.player }} {{ line.actscene | replace: '.','scene'| prepend: 'act' }} row mt-3 playline">
 <div class="col-2 small"></div>
-<div class="col-10 font-weight-bold">
+<div class="col-10 fw-bold">
 <p class="mb-0 playerline">
 {{line.player | remove: ":"}}: </p>
 </div>

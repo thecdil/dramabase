@@ -6,13 +6,13 @@
     var annotation = $(this).data("filter");
     $("div").not("#" + annotation).removeClass("annotate-show");
     $("#" + annotation).toggleClass('annotate-show');
-    $("span.hilite").not(".hi-" + annotation).removeClass('font-weight-bold');
-    $(".hi-" + annotation).toggleClass('font-weight-bold');
+    $("span.hilite").not(".hi-" + annotation).removeClass('fw-bold');
+    $(".hi-" + annotation).toggleClass('fw-bold');
   });
 
   $(".hilite").hover(function () {
     var hiliteid = $(this).data("filter");
-    $("." + hiliteid).toggleClass('font-weight-bold');
+    $("." + hiliteid).toggleClass('fw-bold');
   });
 
 })();

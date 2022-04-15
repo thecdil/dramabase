@@ -14,12 +14,6 @@ custom-foot: js/lines-js.html;js/transcript-js.html;js/annotation-js.html
 {%- assign uniqueScenes = lines | map: 'actscene' | compact | uniq -%}
 
 <div class="container">
-    <div class="row my-3">
-        <div class="col-md-12">
-            <h1>{{ site.play_title }}</h1>
-        </div>
-      
-    </div>
     
     <div class="row my-3 sticky-top bg-white border-bottom border-left border-right d-print-none">
         
@@ -52,7 +46,7 @@ custom-foot: js/lines-js.html;js/transcript-js.html;js/annotation-js.html
                     </div>
                     <div class="col-md-6">
                         <button class="reset btn btn-sm btn-secondary mt-1" href="#" data-filter="">Reset Filters</button>
-                        <h5 class="d-none linecount" ><span class="info2"><span id="numberof">{{ lines | size }}</span> of {{ lines | size }} lines</span></h5>
+                        <h5 class="d-none linecount" ><span class="info2"><span id="numberof"></span></h5>
 
                     </div>
                 </div>

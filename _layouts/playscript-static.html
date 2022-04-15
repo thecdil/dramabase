@@ -93,7 +93,7 @@ custom-foot: js/lines-js.html;js/transcript-js.html;js/annotation-js.html
         {% unless line.player == prev_player %}
         <div class="{{ line.player }} {{ line.actscene | replace: '.','scene'| prepend: 'act' }} row mt-3 playline">
             <div class="col-1 small"></div>
-            <div class="col-8 col-md-9 font-weight-bold">
+            <div class="col-8 col-md-9 fw-bold">
                 <p class="mb-0 playerline">
                     {{line.player | remove: ":"}}: </p>
             </div>
