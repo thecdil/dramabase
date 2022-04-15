@@ -28,7 +28,15 @@ if (sessionStorage.getItem("dd_items_store")) {
 }
 
 
+
+
+
 function reset_dd_items(){
   sessionStorage.removeItem('dd_items_store');
+  sessionStorage.removeItem('dd_title');
+  sessionStorage.removeItem('dd_scenes_store');
+
+  
   location.reload(); 
 };
+

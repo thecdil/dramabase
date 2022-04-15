@@ -10,7 +10,7 @@ custom-foot: js/setup-js.html
 
 <div class="card mt-3">
     <div class="card-body">
-        <h3>Use Metadata CSV from Computer</h3>
+        <h3>Use Metadata CSV from Computer <a class="ml-3 btn btn-outline-primary btn-sm small" href="#how-to-download-your-google-sheet-as-csv">Instructions</a></h3>
         <p>
             <form id="metadataFile" onsubmit="metadata_file_selector(); return false;">
                 <div class="input-group">
@@ -27,7 +27,7 @@ custom-foot: js/setup-js.html
 </div>
 <div class="card mb-3">
     <div class="card-body">
-        <h3>Use Metadata Link</h3>
+        <h3>Use Metadata Link <a class="ml-3 btn btn-outline-primary btn-sm small" href="#how-to-publish-your-google-sheet">Instructions</a></h3>
         <p>
             <form id="metadataUrl" onsubmit="metadata_url_selector(); return false;">
                 <div class="input-group">
@@ -43,8 +43,7 @@ custom-foot: js/setup-js.html
     </div>
 </div>
 
-This page can temporarily configure the metadata used on the site to test your CollectionBuilder spreadsheet. 
-The configurations are stored in your browser's session storage, so will remain only until you close this window!
+This page can temporarily configure the metadata used on the site to test your playscript's spreadsheet. The configurations are stored in your browser's session storage, so the changes will disappear after you close this window! If you'd like to make them permanent, see [these directions](#notgoinganywhereyet) for removing the scaffolding.
 
 The site is currently configured to feature:
 <div class="my-4">

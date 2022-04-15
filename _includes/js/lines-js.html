@@ -51,11 +51,11 @@ function makeLine(obj) {
       }
     else if(obj.player == prevPlayer) {
         var player;
-        var playerClass = obj.player.replace(' ','');  
+        var playerClass = obj.player.replaceAll(' ','');  
     }
      else  {
         var player = obj.player;
-        var playerClass = obj.player.replace(' ','');  
+        var playerClass = obj.player.replaceAll(' ','');  
     }
 
       if (parseInt(obj.line) % 5 === 0){
@@ -128,7 +128,7 @@ function selectPlayers(arr) {
   var options = '<option value="#" class="reset" selected="selected reset">Players</option>';
   var unique = [... new Set(arr)];
   for (var i = 0, len = unique.length; i < len; i++) {
-    var charClass = unique[i].replace(' ','');
+    var charClass = unique[i].replaceAll(' ','');
     options += '<option value="'+charClass+'">'+unique[i]+'</option>';
   }
   $("#players").html(options);
