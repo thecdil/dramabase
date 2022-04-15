@@ -21,21 +21,23 @@
                 <a class="nav-link " href="{{ nav.stub | relative_url }}">{{ nav.display_name }}</a>
             </li>
             {%- else -%}
-            <li class="nav-item dropdown">
+            <li class="nav-item">
                 {% assign navChildren = site.data.config-nav | where_exp: 'item', 'item.dropdown_parent == nav.display_name' %}
                 {%- assign childStubs = navChildren | map: 'stub' -%}
-                <a class="nav-link  dropdown-toggle{% if childStubs contains page.url %} active{% endif %}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ nav.display_name }}</a>
-                <div class="dropdown-menu">
+                {%- assign parent = navChildren[0].dropdown_parent | slugify -%}
+                <button class="btn btn-toggle nav-link dropdown-toggle collapsed {% if childStubs contains page.url %} active{% endif %}" data-bs-toggle="collapse" data-bs-target="#{{parent}}-collapse" aria-expanded="true">{{ nav.display_name }}</button>
+                <div class="collapse" id="{{parent}}-collapse">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     {% for c in navChildren %}
-                    <a class="dropdown-item {% if page.url == c.stub %}active{% endif %}" href="{{ c.stub | relative_url }}">{{ c.display_name }}</a>
+                    <li class="dropdown-item"><a class="link-dark rounded {% if page.url == c.stub %}active{% endif %}" href="{{ c.stub | relative_url }}">{{ c.display_name }}</a></li>
                     {% endfor %}
                 </div>
             </li>
             {% endif %}
             {%- endfor -%}
             <li class="nav-item">
-            <button class="btn btn-toggle nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#scenes-collapse" aria-expanded="true">
-              Jump to Scenes
+            <button class="btn btn-toggle nav-link dropdown-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#scenes-collapse" aria-expanded="true">
+              Scenes
             </button>
             <div class="collapse" id="scenes-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="scenesNavDropdown">
