@@ -8,8 +8,11 @@ function dd_items_init(results) {
   dd_scenes = $.unique(dd_items.map(function (d) {return d.actscene;}));
   sessionStorage.setItem("dd_items_store", JSON.stringify(dd_items));
   sessionStorage.setItem("dd_scenes_store", JSON.stringify(dd_scenes));
+  sessionStorage.setItem("dd_title", dd_items[1].play);
+  console.log(dd_items[1].play);
   pageInit(dd_items,dd_scenes);
 }
+
 // check for sessionStored items
 if (sessionStorage.getItem("dd_items_store")) {
   dd_items = JSON.parse(sessionStorage.getItem("dd_items_store"));
