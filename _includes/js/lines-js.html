@@ -1,6 +1,6 @@
 {%- assign fields = site.data.config-browse -%}
 <script>
-{% include js/dd-items.js %}
+
 /* function to make each line to page */
 function makeLine(obj) {
     var index = dd_items.findIndex(i => i.dataline== obj.dataline);
@@ -10,6 +10,23 @@ function makeLine(obj) {
     var prevLineObject = dd_items[prevLineNum];
     var prevPlayer = prevLineObject.player;
   }
+
+  if(obj.annotation) {
+      if (obj.annotation.includes("ibid")){
+        var subtractingNumber = parseInt(obj.annotation.replace("ibid",""));
+        var mainNumber = parseInt(obj.dataline) - subtractingNumber;
+        var ibid = obj.annotation;
+        var annoId = 'anno' + mainNumber;
+      } else { 
+        // load markdownit library
+        var md = window.markdownit();
+        var annotation = md.renderInline(obj.annotation);
+        annoId = 'anno' + obj.dataline;
+      }
+    }
+    else { 
+        var annotation; 
+    }
 
   if(obj.highlight) {
       var hilite = '<span class="hilite hi-'+ annoId + '" data-filter="hi-'+ annoId + '">'+ obj.highlight +'</span>';
@@ -40,24 +57,6 @@ function makeLine(obj) {
         var player = obj.player;
         var playerClass = obj.player.replace(' ','');  
     }
-    
-    if(obj.annotation) {
-      if (obj.annotation.includes("ibid")){
-        var subtractingNumber = parseInt(obj.annotation.replace("ibid",""));
-        var mainNumber = parseInt(obj.dataline) - subtractingNumber;
-        var ibid = obj.annotation;
-        var annoId = 'anno' + mainNumber;
-      } else { 
-        // load markdownit library
-        var md = window.markdownit();
-        var annotation = md.renderInline(obj.annotation);
-        annoId = 'anno' + obj.dataline;
-      }
-    }
-    else { 
-        var annotation; 
-    }
-
 
       if (parseInt(obj.line) % 5 === 0){
         var lineNumber = obj.actsceneline;
@@ -66,7 +65,7 @@ function makeLine(obj) {
     var line = '<div class="line">'; 
     // add player if new player to announce
     if(player) {
-      line += '<div class="' + playerClass + ' act' + obj.act + 'scene' + obj.scene + ' row mt-4 playline" style=""><div class="col-1 small"></div><div class="col-8 col-md-9 font-weight-bold"><p class="mb-0 playerline fw-bold">' + obj.player + ': </p></div></div>';
+      line += '<div class="' + playerClass + ' act' + obj.act + 'scene' + obj.scene + ' row mt-4 playline" style=""><div class="col-1 small"></div><div class="col-8 col-md-9 fw-bold"><p class="mb-0 playerline fw-bold">' + obj.player + ': </p></div></div>';
     }
     // start line
     line += '<div id="' + obj.dataline + '" class="' + playerClass + ' act' + obj.act + 'scene' + obj.scene + ' row playline textline" style="">';
@@ -97,9 +96,9 @@ function makeLine(obj) {
 /* function to filter items to be displayed on browse */
 function filterItems(arr,q) {
   // dont filter if no q 
-  if (q=="") { 
+  // if (q=="") { 
     var filteredItems = arr; 
-  } else {
+ /* } else {
     q = q.trim().toUpperCase(); 
     // filter items
     var filteredItems = [];
@@ -110,7 +109,7 @@ function filterItems(arr,q) {
         filteredItems.push(arr[i]);
       }
     }
-  }
+  }*/
   // add number 
   $("#numberOf").html(filteredItems.length + " of " + arr.length + " items");
     // add stuff, make lines first in giant var, then add all at once to speed things up
@@ -143,11 +142,19 @@ function selectScenes(arr) {
     var scene = arr[i].split('.')[1];
     var sceneClass = 'act' + act + 'scene' + scene;
     options += '<option value="'+sceneClass+'">Act ' + act + ', Scene ' + scene +'</option>';
-    scenesNav += '<a class="dropdown-item" href="?scene=act' + act + 'scene' + scene +'">Act ' + act + ', Scene ' + scene +'</a>'
+    scenesNav += '<li class="dropdown-item"><a class="link-dark rounded " onclick="scrollToScene(\'act' + act + 'scene' + scene +'\')">Act ' + act + ', Scene ' + scene +'</a></li>'
   } 
   $("#scenes").html(options);
   $("#scenesNavDropdown").html(scenesNav);
 
+}
+
+function scrollToScene(scene) {
+    const scene_starts = document.getElementsByClassName(scene);
+    window.scroll({
+    top: scene_starts[0].offsetTop,
+    behavior: 'smooth'
+  });
 }
 
 
@@ -158,7 +165,6 @@ function pageInit(items) {
     query = decodeURIComponent(location.hash.substr(1));
     $('#quickSearch').val(query);
     filterItems(items,query);
-   
   } else {
     query = "";
     dd_actscenes = $.unique(items.map(function (d) {return d.actscene;}));
@@ -194,5 +200,5 @@ $(window).on("hashchange", function() {
  
 });
 
-
+{% include js/dd-items.js %}
 </script>

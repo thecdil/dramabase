@@ -1,0 +1,28 @@
+<script>
+    var dd_title = "";
+    var static_title = "{{site.title}}";
+
+     // find current configured metadata
+  var dd_title = sessionStorage.getItem("dd_title") ? sessionStorage.getItem("dd_title") : static_title;
+  // display configured metadata
+  document.getElementById("play_title").innerHTML = dd_title != "" ? dd_title : "";
+  
+var dd_scenes = "";
+var static_scenes = "";
+var scenesNav = '';
+
+var dd_scenes_nav = sessionStorage.getItem("dd_scenes") ? sessionStorage.getItem("dd_scenes") : static_scenes;
+
+  
+  for (var i = 0, len = dd_scenes_nav.length; i < len; i++) {
+      console.log("working");
+    var act = dd_scenes_nav[i].split('.')[0];
+    var scene = dd_scenes_nav[i].split('.')[1];
+    var sceneClass = 'act' + act + 'scene' + scene;
+    scenesNav += '<li class="dropdown-item"><a class="link-dark rounded " onclick="scrollToScene(act' + act + 'scene' + scene +')">Act ' + act + ', Scene ' + scene +'</a></li>'
+  } 
+  $("#scenesNavDropdown").html(scenesNav);
+
+
+
+</script>
