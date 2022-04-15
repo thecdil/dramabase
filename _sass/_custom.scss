@@ -133,6 +133,12 @@
     margin-top: 25px;
 }
 
+.scene-scroll{
+    font-size: .675em;
+
+    line-height: .675em;
+}
+
 // Print the columns at full width
 @media print {  
     .col-print-1 {width:8%; }
