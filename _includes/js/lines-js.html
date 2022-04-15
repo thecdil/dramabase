@@ -137,16 +137,18 @@ function selectPlayers(arr) {
 function selectScenes(arr) {
   var options = '<option value="#" class="reset" selected="selected reset">Filter by Scene</option>';
   var scenesNav = '';
+  var scenesSide = '';
   for (var i = 0, len = arr.length; i < len; i++) {
     var act = arr[i].split('.')[0];
     var scene = arr[i].split('.')[1];
     var sceneClass = 'act' + act + 'scene' + scene;
     options += '<option value="'+sceneClass+'">Act ' + act + ', Scene ' + scene +'</option>';
-    scenesNav += '<li class="dropdown-item"><a class="link-dark rounded " onclick="scrollToScene(\'act' + act + 'scene' + scene +'\')">Act ' + act + ', Scene ' + scene +'</a></li>'
+    scenesNav += '<li class="dropdown-item"><a class="link-dark rounded " href="/?scene=act' + act + 'scene' + scene +'"><span class="d-md-none"></span><span class="d-none d-md-block">Act ' + act + ', Scene ' + scene +'</span></a></li>'
+    scenesSide += '<a class="active py-0 border-bottom fst-italic small text-secondary" role="button" onclick="scrollToScene(\'act' + act + 'scene' + scene +'\')"><span class="d-md-none">' + arr[i] +'</span><span class="d-none d-md-block">Act ' + act + ', Scene ' + scene +'</span></a><br>'
   } 
   $("#scenes").html(options);
   $("#scenesNavDropdown").html(scenesNav);
-
+  $("#scenesScroll").html(scenesSide);
 }
 
 function scrollToScene(scene) {

@@ -7,7 +7,7 @@
   
   <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+      <h5 class="offcanvas-title" id="offcanvasLabel"></h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
@@ -35,7 +35,7 @@
             {%- endfor -%}
             <li class="nav-item">
             <button class="btn btn-toggle nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#scenes-collapse" aria-expanded="true">
-              Scenes
+              Jump to Scenes
             </button>
             <div class="collapse" id="scenes-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="scenesNavDropdown">
@@ -45,9 +45,9 @@
             </div>
         </ul>
         
-        
-        {% include nav-search-lunr.html %}
+        <div class="mt-5">
         {% include nav-refresh-data.html %}
+      </div>
 
       </div>
     </div>
