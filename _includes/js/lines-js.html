@@ -138,24 +138,30 @@ function selectScenes(arr,acts_arr) {
   var options = '<option value="#" class="reset" selected="selected reset">Scenes</option>';
   var scenesNav = '';
   var scenesSide = '';
+  if (arr.length < 18){
   for (var i = 0, len = arr.length; i < len; i++) {
       var ref_url = "{{ '/?scene=' | relative_url }}";
       var act = arr[i].split('.')[0];
       var scene = arr[i].split('.')[1];
       var sceneClass = 'act' + act + 'scene' + scene;
       options += '<option value="'+sceneClass+'">Act ' + act + ', Scene ' + scene +'</option>';
-      scenesNav += '<li class="dropdown-item"><a class="link-dark rounded " href="'+ ref_url +'act' + act + 'scene' + scene +'"><span class="d-md-none">'+ arr[i] +'</span><span class="d-none d-md-block">Act ' + act + ', Scene ' + scene +'</span></a></li>'
-      if (arr.length < 18){
-        scenesSide += '<a class="py-0 border-bottom fst-italic small text-dark scene-scroll" role="button" onclick="scrollToScene(\'act' + act + 'scene' + scene +'\')" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Jump to Scene '+ arr[i] +'">' + arr[i] +'</span></a><br>'
-        } 
-      else {
-        for (var i = 0, len = acts_arr.length; i < len; i++) {
-        scenesSide += '<a class="py-0 border-bottom fst-italic small text-dark scene-scroll" role="button" onclick="scrollToScene(\'act' + acts_arr[i] + '-start\')" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Jump to Act '+ acts_arr[i] +'">Act ' + acts_arr[i] +'</span></a><br>'
-        }
+
+      scenesSide += '<a class="py-0 border-bottom fst-italic small text-dark scene-scroll" role="button" onclick="scrollToScene(\'act' + act + 'scene' + scene +'\')" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Jump to Scene '+ arr[i] +'">' + arr[i] +'</span></a><br>';
+      } 
+    }
+    else {
+      for (var i = 0, len = arr.length; i < len; i++) {
+      var ref_url = "{{ '/?scene=' | relative_url }}";
+      var act = arr[i].split('.')[0];
+      var scene = arr[i].split('.')[1];
+      var sceneClass = 'act' + act + 'scene' + scene;
+      options += '<option value="'+sceneClass+'">Act ' + act + ', Scene ' + scene +'</option>';
+      } 
+      for (var i = 0, len = acts_arr.length; i < len; i++) {
+        scenesSide += '<a class="py-0 border-bottom fst-italic small text-dark scene-scroll" role="button" onclick="scrollToScene(\'act' + acts_arr[i] + '-start\')" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Jump to Act '+ acts_arr[i] +'">Act ' + acts_arr[i] +'</span></a><br>';
       }
     }
   $("#scenes").html(options);
-  $("#scenesNavDropdown").html(scenesNav);
   $("#scenesScroll").html(scenesSide);
 }
 

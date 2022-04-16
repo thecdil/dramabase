@@ -1,6 +1,8 @@
 /* Load items from Sheets, store in sessionStorage, or load from sessionStorage */
 var dd_items = [];
 var dd_scenes = [];
+if (sessionStorage.getItem("dd_metadata_set")){
+  var current_metadata = sessionStorage.getItem("dd_metadata_set");}
 
 // function to process items from Sheets and store
 function dd_items_init(results) {
@@ -18,6 +20,14 @@ if (sessionStorage.getItem("dd_items_store")) {
   dd_items = JSON.parse(sessionStorage.getItem("dd_items_store"));
   pageInit(dd_items,dd_scenes);
 
+} else if (current_metadata){ 
+  /* use papaparse to get metadata from google sheets, then init page */
+
+  Papa.parse(current_metadata, {
+    download: true,
+    header: true,
+    complete: (results) => dd_items_init(results)
+  });
 } else { 
   /* use papaparse to get metadata from google sheets, then init page */
   Papa.parse("{{ site.play | relative_url }}", {
@@ -32,11 +42,8 @@ if (sessionStorage.getItem("dd_items_store")) {
 
 
 function reset_dd_items(){
-  sessionStorage.removeItem('dd_items_store');
-  sessionStorage.removeItem('dd_title');
-  sessionStorage.removeItem('dd_scenes_store');
-
   
+  sessionStorage.removeItem('dd_items_store');  
   location.reload(); 
 };
 
