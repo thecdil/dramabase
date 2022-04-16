@@ -60,4 +60,14 @@
       dd_items_setup(selectedUrl);
   }
 
+  function metadata_demo_selector() {
+      // file url 
+      var selectedUrl = document.getElementById("demoUrl").value;
+      console.log(selectedUrl);
+      // record in session store
+      sessionStorage.setItem("dd_metadata_set",selectedUrl);
+      // give url to papa parse
+      dd_items_setup(selectedUrl);
+  }
+
   </script>
