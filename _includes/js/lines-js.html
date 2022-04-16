@@ -145,7 +145,7 @@ function selectScenes(arr,acts_arr) {
       var sceneClass = 'act' + act + 'scene' + scene;
       options += '<option value="'+sceneClass+'">Act ' + act + ', Scene ' + scene +'</option>';
       scenesNav += '<li class="dropdown-item"><a class="link-dark rounded " href="/?scene=act' + act + 'scene' + scene +'"><span class="d-md-none">'+ arr[i] +'</span><span class="d-none d-md-block">Act ' + act + ', Scene ' + scene +'</span></a></li>'
-      scenesSide += '<a class="py-0 border-bottom fst-italic small text-secondary scene-scroll" role="button" onclick="scrollToScene(\'act' + act + 'scene' + scene +'\')" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Jump to Scene '+ arr[i] +'">' + arr[i] +'</span></a><br>'
+      scenesSide += '<a class="py-0 border-bottom fst-italic small text-dark scene-scroll" role="button" onclick="scrollToScene(\'act' + act + 'scene' + scene +'\')" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Jump to Scene '+ arr[i] +'">' + arr[i] +'</span></a><br>'
       } 
     }
     else {
@@ -157,7 +157,7 @@ function selectScenes(arr,acts_arr) {
       scenesNav += '<li class="dropdown-item"><a class="link-dark rounded " href="/?scene=act' + act + 'scene' + scene +'"><span class="d-md-none">'+ arr[i] +'</span><span class="d-none d-md-block">Act ' + act + ', Scene ' + scene +'</span></a></li>'
       } 
       for (var i = 0, len = acts_arr.length; i < len; i++) {
-        scenesSide += '<a class="py-0 border-bottom fst-italic small text-secondary scene-scroll" role="button" onclick="scrollToScene(\'act' + acts_arr[i] + '-start\')" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Jump to Act '+ acts_arr[i] +'">Act ' + acts_arr[i] +'</span></a><br>'
+        scenesSide += '<a class="py-0 border-bottom fst-italic small text-dark scene-scroll" role="button" onclick="scrollToScene(\'act' + acts_arr[i] + '-start\')" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Jump to Act '+ acts_arr[i] +'">Act ' + acts_arr[i] +'</span></a><br>'
       }
     }
   $("#scenes").html(options);
@@ -180,6 +180,19 @@ function scrollToScene(scene) {
     top: scene_starts[0].offsetTop,
     behavior: 'smooth'
   });
+}
+
+function scrollToLine(line_array_num) {
+  const featured_lines = document.getElementsByClassName('line');
+  var line_num = parseInt(line_array_num);
+  var position = featured_lines[line_num].offsetTop;
+  var plus_position = parseInt(position) - 300;
+    window.scroll({
+    top: plus_position,
+    behavior: 'smooth'
+  });
+console.log(position + ' - ' + plus_position);
+
 }
 
 
