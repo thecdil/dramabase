@@ -109,7 +109,7 @@
           itemcontents.classList.add("featured");
           itemcontents.classList.remove("grey");
           itemcontents.innerHTML = itemcontents.innerHTML.replace(filterplain, "<span class='text-danger'>" + filterplain + "</span>");
-          searchResults += '<option  onclick="scrollToLine('+ i +')">'+itemcontents.innerHTML + '</option>';
+          searchResults += '<option value="'+ i +'">'+itemcontents.innerHTML + '</option>';
           } else {
         }
       }

@@ -158,4 +158,20 @@ body {
 }
  }
 
- 
+ .show-mobile-annotation{
+     display: block !important;
+
+ }
+ @media screen and (max-width: 576px) {
+    .show-mobile-annotation{
+        display: block !important;
+   
+    }
+ }
+
+ .btn-outline-dark {
+    background-color: white;
+    &:hover{
+        background-color: #212529 !important;
+    }
+}

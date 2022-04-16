@@ -182,7 +182,8 @@ function scrollToScene(scene) {
   });
 }
 
-function scrollToLine(line_array_num) {
+function scrollToLine() {
+  var line_array_num = document.getElementById('searchResults').value;
   const featured_lines = document.getElementsByClassName('line');
   var line_num = parseInt(line_array_num);
   var position = featured_lines[line_num].offsetTop;
@@ -192,7 +193,6 @@ function scrollToLine(line_array_num) {
     behavior: 'smooth'
   });
 console.log(position + ' - ' + plus_position);
-
 }
 
 
