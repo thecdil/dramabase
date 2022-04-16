@@ -77,17 +77,15 @@
     params.delete('scene');
     var p = params.toString();
     window.history.replaceState({}, '', location.pathname + '?' + p);
+    $('.filter-search').addClass('d-none');
+    $("#searchResults").html('');
   });
 
   $("option:first").click(function () {
     $("button.reset").click();
-  })
+  });
 
-
-
-</script>
-<script>
-  function filterLines() {
+ function filterLines() {
     $('.playerline').removeClass("anchored-highlight");
     $(".playerline").removeClass("featured");
     $(".playerline").addClass("grey");
@@ -102,6 +100,7 @@
     filter = input.value.toUpperCase();
     itemcontainer = document.getElementById("contents-container");
     item = itemcontainer.getElementsByTagName("section");
+    var searchResults = '<option>Select and scroll to a matching line</option>';
     for (i = 0; i < item.length; i++) {
       itemcontents = item[i].getElementsByClassName("playerline")[0];
       var index = itemcontents.innerHTML.indexOf(filterplain);
@@ -109,13 +108,16 @@
         if (itemcontents.innerHTML.toUpperCase().indexOf(filter) > -1) {
           itemcontents.classList.add("featured");
           itemcontents.classList.remove("grey");
-          $(".annotation .content p").addClass("grey");
           itemcontents.innerHTML = itemcontents.innerHTML.replace(filterplain, "<span class='text-danger'>" + filterplain + "</span>");
-        } else {
+          searchResults += '<option  onclick="scrollToLine('+ i +')">'+itemcontents.innerHTML + '</option>';
+          } else {
         }
       }
      var numberofint = $('.featured').length;
-     $("#numberof").html(numberofint + " lines");
+     $("#numberoflines").html(numberofint + " lines match your query");
+     $("#searchResults").html(searchResults);
+     $('.linecount').removeClass('d-none');
+     $('.filter-search').removeClass('d-none');
     }
   }
 
