@@ -7,41 +7,7 @@ custom-foot: js/setup-js.html
 
 # Set up your play
 
-
-<div class="card mt-3">
-    <div class="card-body">
-        <h3>Use Metadata CSV from Computer <a class="ml-3 btn btn-outline-primary btn-sm small" href="#how-to-download-your-google-sheet-as-csv">Instructions</a></h3>
-        <p>
-            <form id="metadataFile" onsubmit="metadata_file_selector(); return false;">
-                <div class="input-group">
-                    <input type="file" accept=".csv" id="csvFile" class="form-control">
-                    <div class="input-group-append">
-                        <button class="btn btn-dark" type="submit">
-                            Submit
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </p>
-    </div>
-</div>
-<div class="card mb-3">
-    <div class="card-body">
-        <h3>Use Metadata Link <a class="ml-3 btn btn-outline-primary btn-sm small" href="#how-to-publish-your-google-sheet">Instructions</a></h3>
-        <p>
-            <form id="metadataUrl" onsubmit="metadata_url_selector(); return false;">
-                <div class="input-group">
-                    <input type="url" id="csvUrl" class="form-control" pattern="https://.*" placeholder="Paste in the full URL to CSV hosted online">
-                    <div class="input-group-append">
-                        <button class="btn btn-dark" type="submit">
-                            Submit
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </p>
-    </div>
-</div>
+{% include setup-forms.html %}
 
 This page can temporarily configure the metadata used on the site to test your playscript's spreadsheet. The configurations are stored in your browser's session storage, so the changes will disappear after you close this window! If you'd like to make them permanent, see [these directions](#notgoinganywhereyet) for removing the scaffolding.
 
