@@ -1,5 +1,10 @@
+{%- assign lines = site.data[site.play] -%}
+{%- assign scenes = lines | map: 'actscene' | compact | uniq -%}
+
 <script>
-    var dd_title = "";
+  function set_constants(){
+    console.log("running set constatns")
+  var dd_title = "";
     var static_title = "{{site.title}}";
 
      // find current configured metadata
@@ -9,10 +14,12 @@
   document.getElementById("offcanvasLabel").innerHTML = dd_title != "" ? dd_title : "";
   
   var dd_scenes = "";
-var static_scenes = "";
+var static_scenes = '{{scenes}}';
 var scenesNav = '';
 
 var dd_scenes_nav = sessionStorage.getItem("dd_scenes_store") ? sessionStorage.getItem("dd_scenes_store") : static_scenes;
+
+
 var dd_scenes = JSON.parse(dd_scenes_nav);  
   for (var i = 0, len = dd_scenes.length; i < len; i++) {
     var ref_url = "{{ '/?scene=' | relative_url }}";
@@ -23,5 +30,5 @@ var dd_scenes = JSON.parse(dd_scenes_nav);
       scenesNav += '<li class="dropdown-item"><a class="link-dark rounded " href="'+ ref_url +'act' + act + 'scene' + scene +'">Act ' + act + ', Scene ' + scene +'</a></li>'
       
   } 
-  $("#scenesNavDropdown").html(scenesNav);
+  $("#scenesNavDropdown").html(scenesNav);}
 </script>
