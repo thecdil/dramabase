@@ -34,7 +34,7 @@
             overflow: hidden;
         }
 
-        figure {
+        figure,img {
             display: none;
         }
     }
@@ -52,7 +52,7 @@
         padding: .75em;
         z-index: 100;
 
-        figure {
+        figure,img {
             display: block;
         }
     }
