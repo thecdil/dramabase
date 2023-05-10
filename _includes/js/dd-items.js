@@ -17,9 +17,25 @@ function dd_items_init(results) {
   pageInit(dd_items,dd_scenes);
   initial_scenes();
 }
+// Get the URL query string
+const queryString = window.location.search;
 
-// check for sessionStored items
-if (sessionStorage.getItem("dd_items_store")) {
+// Parse the query string into an object
+const urlParams = new URLSearchParams(queryString);
+
+// Check if the "play" parameter exists and has a non-empty value
+if (urlParams.has("play") && urlParams.get("play").trim().length > 0) {
+  // Get the value of the "play" parameter
+  var playParam = urlParams.get("play");
+
+ /* use papaparse to get metadata from google sheets, then init page */
+ Papa.parse(playParam, {
+  download: true,
+  header: true,
+  complete: (results) => dd_items_init(results)
+});
+} 
+else if (sessionStorage.getItem("dd_items_store")) {
   dd_items = JSON.parse(sessionStorage.getItem("dd_items_store"));
   pageInit(dd_items,dd_scenes);
 
