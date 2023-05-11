@@ -7,7 +7,10 @@ custom-foot: js/setup-js.html
 
 # Set up your play
 
-{% include setup-forms.html %}
+{% include setup-forms/sheets.html %}
+{% include setup-forms/local-csv.html %}
+{% include setup-forms/shakesselect.html %}
+
 
 This page can temporarily configure the metadata used on the site to test your playscript's spreadsheet. The configurations are stored in your browser's session storage, so the changes will disappear after you close this window! If you'd like to make them permanent, see [these directions](#notgoinganywhereyet) for removing the scaffolding.
 
