@@ -5,6 +5,11 @@ var scenesNav = [];
 
 if (sessionStorage.getItem("dd_metadata_set")){
   var current_metadata = sessionStorage.getItem("dd_metadata_set");}
+  // find current configured metadata
+  var dd_metadata_set = sessionStorage.getItem("dd_metadata_set") ? sessionStorage.getItem("dd_metadata_set") : config_metadata;
+  // display configured metadata
+  document.getElementById("current-metadata").innerHTML = dd_metadata_set != "" ? dd_metadata_set : "None!";
+  
 
 // function to process items from Sheets and store
 function dd_items_init(results) {
