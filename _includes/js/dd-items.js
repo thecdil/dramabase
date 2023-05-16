@@ -9,6 +9,7 @@ if (sessionStorage.getItem("dd_metadata_set")){
   var dd_metadata_set = sessionStorage.getItem("dd_metadata_set") ? sessionStorage.getItem("dd_metadata_set") : config_metadata;
   // display configured metadata
   document.getElementById("current-metadata").innerHTML = dd_metadata_set != "" ? dd_metadata_set : "None!";
+  document.getElementById("current-metadata-menu").innerHTML = dd_metadata_set != "" ? dd_metadata_set : "None!";
   
 
 // function to process items from Sheets and store
