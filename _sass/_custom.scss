@@ -7,10 +7,7 @@
     This allows you to override any CollectionBuilder or Bootstrap CSS without modifying the base theme files directly.
 */
 
-.grey {
-    color: grey;
-   }
-   
+ 
 .annotation {
     background-color: transparent;
     width: 15vw;
@@ -79,8 +76,7 @@
 
 .filter-search {
     position: relative;
-    z-index: 100;
-    
+    z-index: 100; 
 }
 
 .performance-annotated {
@@ -175,3 +171,4 @@ body {
         background-color: #212529 !important;
     }
 }
+

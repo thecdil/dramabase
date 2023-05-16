@@ -2,7 +2,6 @@
   $("#players").on('change', function () {
     var myClass = this.value;
     $("section").removeClass("featured");
-    $("section").removeClass("grey");    
     $('div').removeClass("anchored-highlight");
     $(".playline").hide();
     $('div.' + myClass).show();
@@ -23,7 +22,6 @@
   $("#scenes").on('change', function () {
     var myClass = this.value;
     $("section").removeClass("featured");
-    $("section").removeClass("grey");
     $('div').removeClass("anchored-highlight");
     $(".playline").hide();
     $('div.' + myClass).show();
@@ -57,14 +55,11 @@
 
   $("button.reset").click(function () {
     $(".playline").show();
-    $(".searchline").removeClass("grey");
     $('div').removeClass("anchored-highlight");
     $('div').removeClass("annotate-show");
     $("div").removeClass("featured");
     $("section").removeClass("featured");
     $("span").removeClass("text-danger");
-    $("p").removeClass("grey");
-    $("div").removeClass("grey");
     $("input#quicksearch").val("");
     $("#players").val($("#players option:first").val());
     $("#scenes").val($("#scenes option:first").val());
@@ -88,7 +83,6 @@
  function filterLines() {
     $('.playerline').removeClass("anchored-highlight");
     $(".playerline").removeClass("featured");
-    $(".playerline").addClass("grey");
     var input, filter, p, span, i;
     input = document.getElementById("quicksearch");
     let url = new URL(window.location);
@@ -107,7 +101,6 @@
       if (itemcontents) {
         if (itemcontents.innerHTML.toUpperCase().indexOf(filter) > -1) {
           itemcontents.classList.add("featured");
-          itemcontents.classList.remove("grey");
           itemcontents.innerHTML = itemcontents.innerHTML.replace(filterplain, "<span class='text-danger'>" + filterplain + "</span>");
           searchResults += '<option value="'+ i +'">'+itemcontents.innerHTML + '</option>';
           } else {
