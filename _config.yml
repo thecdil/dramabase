@@ -6,7 +6,7 @@
 
 ##########
 # Play SETTINGS
-# Enter a Google sheets link, a relative link to a CSV file in the repository (e.g. /assets/data/play_example.csv), or a link to a CSV file stored somewhere accesible on the internet (i.e. https://example.com/play_example.csv)
+# Enter a Google sheets link (like the one below), a relative link to a CSV file in the repository (e.g. /assets/data/play_example.csv), or a link to a CSV file stored somewhere accessible on the internet (i.e. https://example.com/play_example.csv)
 play: https://docs.google.com/spreadsheets/d/e/2PACX-1vT4-hSjZe4pN0R2-fzmNyc_yrE355W1RgOBmYJ4PF-Lsyo1bKpWVKgwYqGOxGnMvvV41__J66Yjyxa1/pub?output=csv
 
 
@@ -21,26 +21,25 @@ description: "a collaborative annotation of "
 author: dcnb
 
 
-
 ##########
-# URL VARIABLES [optional if using GitHub Pages!]
+# URL VARIABLES [optional if using GitHub Pages! This is only for use if you are deploying the site on your own or your organization's web server.]
 #
 # url is site domain, full URL to the production location of your collection
 # on GitHub Pages follows the pattern username.github.io
-#url: https://collectionbuilder.github.io 
+url:  
 # baseurl is path to location on the domain if necessary e.g. /digital/hjccc
 # on GitHub Pages it is your github repository's name prefixed with a /
-# baseurl: /dramabase
+baseurl: 
 # location of code, the full url to your github repository
 source-code: https://github.com/dcnb/dramabase
 
 ##########
-# COLLECTION SETTINGS
+# COLLECTIONBuilder SETTINGS
 #
-# Set the metadata for your collection (the name of the csv file in your _data directory that describes the objects in your collection) 
+# IF you're adding a collectionBuilder collection to this project, set the metadata for your collection (the name of the csv file in your _data directory that describes the objects in your collection) 
 # Use the filename of your CSV **without** the ".csv" extension! E.g. _data/demo-metadata.csv --> "demo-metadata"
 # You only need to fill this out if you are using the CollectionBuilder features also built into this tool, i.e. if you are connecting your annotations and interpretations to a digital collection of objects
-metadata: demo-metadata 
+# metadata: demo-metadata 
 
 ##########
 # Site/Organization Branding 
