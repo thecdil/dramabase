@@ -2,7 +2,7 @@
 
   // set variables
   var dd_items = [];
-  var config_metadata = "{{ site.play | relative_url }}";
+  var config_metadata = "{{ site.play | relative_url | default: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4-hSjZe4pN0R2-fzmNyc_yrE355W1RgOBmYJ4PF-Lsyo1bKpWVKgwYqGOxGnMvvV41__J66Yjyxa1/pub?output=csv' }}";
   
   // find current configured metadata
   var dd_metadata_set = sessionStorage.getItem("dd_metadata_set") ? sessionStorage.getItem("dd_metadata_set") : config_metadata;

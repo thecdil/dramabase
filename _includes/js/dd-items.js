@@ -2,13 +2,14 @@
 var dd_items = [];
 var dd_scenes = [];
 var scenesNav = [];
+ // set variables
+ var config_metadata = "{{ site.play | relative_url | default: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4-hSjZe4pN0R2-fzmNyc_yrE355W1RgOBmYJ4PF-Lsyo1bKpWVKgwYqGOxGnMvvV41__J66Yjyxa1/pub?output=csv' }}";
 
 if (sessionStorage.getItem("dd_metadata_set")){
   var current_metadata = sessionStorage.getItem("dd_metadata_set");}
   // find current configured metadata
   var dd_metadata_set = sessionStorage.getItem("dd_metadata_set") ? sessionStorage.getItem("dd_metadata_set") : config_metadata;
   // display configured metadata
-  document.getElementById("current-metadata").innerHTML = dd_metadata_set != "" ? dd_metadata_set : "None!";
   document.getElementById("current-metadata-menu").innerHTML = dd_metadata_set != "" ? dd_metadata_set : "None!";
   
 
@@ -55,7 +56,7 @@ else if (sessionStorage.getItem("dd_items_store")) {
   });
 } else { 
   /* use papaparse to get metadata from google sheets, then init page */
-  Papa.parse("{{ site.play | relative_url }}", {
+  Papa.parse("{{ site.play | relative_url | default: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4-hSjZe4pN0R2-fzmNyc_yrE355W1RgOBmYJ4PF-Lsyo1bKpWVKgwYqGOxGnMvvV41__J66Yjyxa1/pub?output=csv'}}", {
     download: true,
     header: true,
     complete: (results) => dd_items_init(results)
