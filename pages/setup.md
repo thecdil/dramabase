@@ -5,23 +5,20 @@ permalink: /setup/
 custom-foot: js/setup-js.html
 ---
 
-# Set up your play
+# Set up the play for this site
+
+This is the main site for Digital Dramaturgy, which is currently in an early development phase.  
+
+The site is currently configured to feature **<span id="play_title_check"></span>** via the following spreadsheet:
+- ***<span id="current-metadata" class="small"></span>***
+
+Use one of the below forms to change the playscript featured. Note that configurations are stored in your browser's session storage, so any changes will disappear after you quit your browser session! If you'd like to make your changes permanent, go through our [How To directions](directions.html).
 
 {% include setup-forms/sheets.html %}
+
 {% include setup-forms/local-csv.html %}
+
 {% include setup-forms/shakesselect.html %}
-
-
-This page can temporarily configure the metadata used on the site to test your playscript's spreadsheet. The configurations are stored in your browser's session storage, so the changes will disappear after you close this window! If you'd like to make them permanent, see [these directions](#notgoinganywhereyet) for removing the scaffolding.
-
-The site is currently configured to feature:
-<div class="my-4">
-<p class="ms-4">Play: <span id="play_title_check" class="fst-italic"></span></p>
-<p class="ms-4">Play Spreadhseet: <span id="current-metadata" class="fst-italic"></span> </p>
-</div>
-
-To keep the currently configured metadata, simply navigate to another page!
-To change the metadata you have two options: select a CSV file from your computer *or* paste in the full link for a CSV hosted online (such as a published Google Sheet).
 
 ## How to Publish Your Google Sheet
 
