@@ -9,7 +9,7 @@ custom-foot: js/setup-js.html
 
 _Digital Dramaturgy_ enables the publication of an annotated and/or edited playscript that can be used as a collaborative educational activity in a classroom or as a dramaturgical aid and preservation measure for dramatic presentations. 
 
-The tool is built on top of the [CollectionBuilder](https://collectionbuilder.github.io/), a digital exhibit framework that's in use around the world. As such, the tool also allows for the publishing of interpretive essays, interactive visualizations (maps, word clouds, etc.), production timelines, and other features. This also allows for the (robust!) documentation from CollectionBuilder to be repurposed or referenced for many features of the tool. 
+Currently, the tool is in early development stages, but the below should get you started if you'd like to check it out. 
 
 ## How it Works
 
@@ -23,17 +23,25 @@ Finally, after developing that site (following the directions) and finalizing th
 
 ### Step 1: Prepare your Script
 
-At minimum, one can set up and publish a _Digital Dramaturgy_ with a published google sheet. We have starter sheets prepared for all of Shakespeare's plays that anyone can use simply by making a copy of them. 
+At minimum, one can set up and publish a _Digital Dramaturgy_ with a published google sheet. We have two options to help you prepare a script.
+
+#### Option A: Use a Prepared Shakespeare Play
+
+ We have starter sheets prepared for all of Shakespeare's plays that anyone can use simply by making a copy of them. These are based on [a dataset found on Kaggle.com](https://www.kaggle.com/datasets/kingburrito666/shakespeare-plays); we are still investigating the provenance of the textual versions of these plays. 
 
 {% include setup-forms/startershakespeare.html %}
 
-One can also prepare their own script by using one of our starter spreadsheets
+#### Option B: Prepare Your Own Script
+
+One can also prepare their own script by using one of our starter spreadsheets:
 
 - [Starter Template with Notes and Examples](https://docs.google.com/spreadsheets/d/1poB0eUjzNKAul30uNSSTJWgduVcUKohb8CH2fKxypK8/copy) 
     - We've included some select lines from Measure for Measure and notes about the fields in this sheet. Delete these rows when ready to publish!
-- [Blank Starter Template](https://docs.google.com/spreadsheets/d/1OD4D9xQe59fCAxJN0Aag30BkbKDPHXbM5J_m_hvhTAk/copy). 
+- [Blank Starter Template](https://docs.google.com/spreadsheets/d/1OD4D9xQe59fCAxJN0Aag30BkbKDPHXbM5J_m_hvhTAk/copy) 
 
-### Step 2: Make your Script Publicly Avaialble Using Google Sheets
+In order for the spreadsheet to generate a Digital Dramaturgy site, it must include certain fields that correspond to the text ("playerline"), the speaker ("player"), the act, the scene, and the line number in the scene. Notes on these required fields are found in the Starter Template with Notes and Examples 
+
+### Step 2: Make your Script Publicly Available Using Google Sheets
 
 The simplest way to publish your playscript spreadsheet on Digital Dramaturgy is by publishing it via Google Sheets. To do so, 
 
@@ -49,7 +57,8 @@ The simplest way to publish your playscript spreadsheet on Digital Dramaturgy is
  
 - Click around and check your play -- any edits you make to your Google Sheet will now update your site. 
 - If you make edits to your spreadsheet, click the yellow "Refresh your Metadata" button on the pop out menu to refresh the website
-- If you'd like to share a link to the site or ßAdd your link as a parameter after the digital dramaturgy website like so: https://thecdil.github.io/?play="{YOUR GOOGLE SHEET LINK HERE}
+- If you'd like to share a link to the site or, add your link as a parameter after the digital dramaturgy website like so: 
+    - ***https://thecdil.github.io/dramabase/?play="{YOUR GOOGLE SHEET LINK HERE}***
     - This enables you to send this option as a link to others with whom you might want to share the site.
 
 ### Step 4: SetUp Your Own GitHub Repository to Publish Your Annotated Playscript 
@@ -64,7 +73,6 @@ _You will need a GitHub account to complete the next steps_
 
 ### Step 5: Deploy Your Site via GitHub Pages
 
-
 1. On your project repository's home page, click the "Settings" button (appears on the right along the tabs above the code area).
 2. On "Settings" page: click "Pages" in the left side menu.
 3. On the "Pages" page: under "Source" leave the dropdown button as "Deploy from a branch". Under "Branch" use the dropdown to change from "none" to "main" (leave the folder option as "/root"), then click the "Save" button. 
@@ -74,4 +82,8 @@ After a few minutes, refresh the "Pages" page.
 If the build is successful, an alert will appear near the top providing the URL to your live site.
 The URL will follow the pattern: "https://username.github.io/repository-name"
 
+### Further Steps and Future Development
 
+Digital Dramaturgy is built on top of  [CollectionBuilder](https://collectionbuilder.github.io/), a digital exhibit framework that's in use around the world. As such, the tool also allows for the publishing of interpretive essays, interactive visualizations (maps, word clouds, etc.), production timelines, and other features. This also allows for the (robust!) documentation from CollectionBuilder to be repurposed or referenced for many features of the tool. 
+
+We have not, however, well documented how to use these features. 
