@@ -45,8 +45,10 @@ function makeLine(obj) {
           var playerClass = "StageDirection scenestart";  
                }
         else  {
-          var playerClass = "StageDirection";  
-          var playerline = '[' + obj.playerline +']';
+          var playerClass = "StageDirection"; 
+          if(annotation) { 
+          var playerline = '[' + playerline +']';}
+          else { var playerline = '[' + obj.playerline +']'; }
         }
       }
     else if(obj.player == prevPlayer) {
@@ -65,15 +67,15 @@ function makeLine(obj) {
     var line = '<section class="line">'; 
     // add player if new player to announce
     if(player) {
-      line += '<div class="' + playerClass + ' act' + obj.act + 'scene' + obj.scene + ' row mt-4 playline" style=""><div class="col-1 small"></div><div class="col-8 col-md-9 fw-bold"><p class="mb-0 playerline fw-bold">' + obj.player + ': </p></div></div>';
+      line += '<div class="' + playerClass.replaceAll(';',' ') + ' act' + obj.act + 'scene' + obj.scene + ' row mt-4 playline" style=""><div class="col-1 small"></div><div class="col-8 col-md-9 fw-bold"><p class="mb-0 playerline fw-bold">' + obj.player.replaceAll(';','<br>') + ': </p></div></div>';
     }
     // start line
-    line += '<div id="' + obj.dataline + '" class="' + playerClass + ' act' + obj.act + 'scene' + obj.scene + ' row playline textline" style="">';
+    line += '<div id="' + obj.dataline + '" class="' + playerClass.replaceAll(';',' ') + ' act' + obj.act + 'scene' + obj.scene + ' row playline textline" style="">';
     // add act.scene.line number
     line += '<div class="col-1 col-print-1" id="' + obj.actsceneline + '"><p class="small mt-2 text-end m-0" style="font-size:10px;">' + lineNumber + '</p></div>';
     // add the line itself
     
-  // add playerline andannotation  if it exists
+  // add playerline and annotation  if it exists
   if(annotation) {
     line += '<div class="col-10 col-md-6 col-print-10 pr-0 playerline annobutton annotated" onclick="toggleAnnotation(&apos;' + annoId +'&apos;);" data-filter="'+ annoId + '">' + playerline + '</div>';
     line += '<div class="d-none d-md-block col-12 col-md-5 small anno-container"><div class="annotation annobutton" onclick="toggleAnnotation(&apos;' + annoId +'&apos;);" id="'+ annoId + '" data-filter="' + annoId + '"><div class="content"><p>' + annotation + '</p></div></div></div>';
@@ -129,7 +131,10 @@ function selectPlayers(arr) {
   var unique = [... new Set(arr)];
   for (var i = 0, len = unique.length; i < len; i++) {
     var charClass = unique[i].replaceAll(' ','');
-    options += '<option value="'+charClass+'">'+unique[i]+'</option>';
+    if (unique[i].includes(";")) {
+    // Code to execute if unique[i] contains a semicolon
+    } else {
+    options += '<option value="'+charClass+'">'+unique[i]+'</option>';}
   }
   $("#players").html(options);
 }
